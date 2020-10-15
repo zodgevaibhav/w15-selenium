@@ -19,12 +19,12 @@ public class LoginPage {
 	
 	public LoginPage()
 	{
-		PageFactory.initElements(WebDriverFactory.dr, this);
+		PageFactory.initElements(WebDriverFactory.getDriver(), this);
 	}
 	
 	public HomePage login(String strUserName, String strPassword)
 	{
-		WebDriverFactory.dr.get("https://opensource-demo.orangehrmlive.com/");
+		WebDriverFactory.getDriver().get("https://opensource-demo.orangehrmlive.com/");
 		userName.sendKeys(strUserName);
 		password.sendKeys(strPassword);
 		loginButton.click();

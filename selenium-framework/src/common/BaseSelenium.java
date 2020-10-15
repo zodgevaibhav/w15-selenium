@@ -10,14 +10,18 @@ public class BaseSelenium {
 	public void beforeEachTest()
 	{
 		System.setProperty("webdriver.chrome.driver", "/Users/vaibhavzodge/Documents/selenium/chromedriver");
-		WebDriverFactory.dr = new ChromeDriver();
-		WebDriverFactory.dr.manage().window().maximize();
+				
+		
+		WebDriverFactory.setDriver(new ChromeDriver());
+		
+		
+		WebDriverFactory.getDriver().manage().window().maximize();
 	}
 	
 	@AfterMethod
 	public void AfterEachTest()
 	{
-		WebDriverFactory.dr.quit();
+		WebDriverFactory.getDriver().quit();
 	}
 
 }

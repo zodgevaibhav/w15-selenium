@@ -14,7 +14,19 @@ public class AddUserTest extends BaseSelenium{
 		lp.login("admin", "admin123")
 			.verifyWelComeText("Welcome Paul")
 				.navigateToAdminPage()
-					.navigateToAddUserPage();
+					.navigateToAddUserPage()
+						.addUser("", "", "", "", "", "");
+	}
+	
+	@Test
+	public void verifyPasswordComplexityMessageDisplayAsVeryWeak()
+	{
+		LoginPage lp = new LoginPage();
+		lp.login("admin", "admin123")
+			.verifyWelComeText("Welcome Paul")
+				.navigateToAdminPage()
+					.navigateToAddUserPage()
+					.enterPasswordAndVerifyPasswordComplexityMessage("a", "Very Weak");
 	}
 	
 	@Test
@@ -25,7 +37,7 @@ public class AddUserTest extends BaseSelenium{
 			.verifyWelComeText("Welcome Paul")
 				.navigateToAdminPage()
 					.navigateToAddUserPage()
-					.enterPasswordAndVerifyPasswordComplexityMessage("a", "Very Weak");
+						.enterPasswordAndVerifyPasswordComplexityMessage("asdfsf", "Weak");
 	}
 
 }

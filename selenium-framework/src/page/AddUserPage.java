@@ -18,7 +18,7 @@ public class AddUserPage {
 		
 	public AddUserPage()
 	{
-		PageFactory.initElements(WebDriverFactory.dr, this);
+		PageFactory.initElements(WebDriverFactory.getDriver(), this);
 	}
 	
 	

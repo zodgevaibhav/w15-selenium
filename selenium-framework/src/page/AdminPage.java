@@ -13,7 +13,7 @@ public class AdminPage {
 	
 	public AdminPage()
 	{
-		PageFactory.initElements(WebDriverFactory.dr, this);
+		PageFactory.initElements(WebDriverFactory.getDriver(), this);
 	}
 	
 	

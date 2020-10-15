@@ -17,7 +17,7 @@ public class HomePage {
 	
 	public HomePage()
 	{
-		PageFactory.initElements(WebDriverFactory.dr, this);
+		PageFactory.initElements(WebDriverFactory.getDriver(), this);
 	}
 	
 	public HomePage verifyWelComeText(String expectedWelcomeText)
