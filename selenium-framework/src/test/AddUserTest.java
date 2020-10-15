@@ -16,5 +16,16 @@ public class AddUserTest extends BaseSelenium{
 				.navigateToAdminPage()
 					.navigateToAddUserPage();
 	}
+	
+	@Test
+	public void verifyPasswordComplexityMessageDisplayAsWeak()
+	{
+		LoginPage lp = new LoginPage();
+		lp.login("admin", "admin123")
+			.verifyWelComeText("Welcome Paul")
+				.navigateToAdminPage()
+					.navigateToAddUserPage()
+					.enterPasswordAndVerifyPasswordComplexityMessage("a", "Very Weak");
+	}
 
 }
