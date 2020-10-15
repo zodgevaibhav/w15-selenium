@@ -1,11 +1,13 @@
 package test;
 
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import common.BaseSelenium;
+import common.IInvokedMethodListenerImpl;
 import page.LoginPage;
 
-public class LoginTest extends BaseSelenium{
+@Listeners({IInvokedMethodListenerImpl.class})
+public class LoginTest {
 	
 	
 	@Test
