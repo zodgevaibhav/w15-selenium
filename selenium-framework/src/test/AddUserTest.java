@@ -12,12 +12,14 @@ public class AddUserTest{
 	@Test
 	public void verifyAdminUsrGettingAddedSuccessfuly()
 	{
+		String randomNumber = new Long(System.currentTimeMillis()).toString();
+		
 		LoginPage lp = new LoginPage();
 		lp.login("admin", "admin123")
 			.verifyWelComeText("Welcome Paul")
 				.navigateToAdminPage()
 					.navigateToAddUserPage()
-						.addUser("", "", "", "", "", "");
+						.addUser("USER_"+randomNumber, "", "", "", "", "");
 	}
 	
 	@Test

@@ -16,7 +16,7 @@ public class LoginTest {
 		LoginPage lp = new LoginPage();
 		
 		lp.login("admin", "admin123")
-			.verifyWelComeText("Welcome Paul");
+			.verifyWelComeText("Welcome Pul");
 	}
 
 }

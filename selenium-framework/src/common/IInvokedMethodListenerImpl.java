@@ -28,7 +28,11 @@ public class IInvokedMethodListenerImpl implements IInvokedMethodListener {
 	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
 		
 		if(!testResult.isSuccess())
-			takeScreenshot(method.getTestMethod().getMethodName()+".png");
+		{
+			String randomNumber = new Long(System.currentTimeMillis()).toString();
+			
+			takeScreenshot(method.getTestMethod().getMethodName()+"-"+randomNumber+".png");
+		}
 		
 		WebDriverFactory.getDriver().quit();
 		
@@ -36,13 +40,12 @@ public class IInvokedMethodListenerImpl implements IInvokedMethodListener {
 
 	
 	public static void takeScreenshot(String fileNameWithPath) {
-		int a=10;
+	//	int a = 10;
+	//	float f = (float)a;
 		
-		float b = (float)a; //auto boxing  //10.00
-
-		//Decorator Design Patern
 		
-		File scrFile = ((TakesScreenshot) WebDriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
+		TakesScreenshot ts = (TakesScreenshot) WebDriverFactory.getDriver();
+		File scrFile = ts.getScreenshotAs(OutputType.FILE);
 		
 		try {
 			FileUtils.copyFile(scrFile, new File(fileNameWithPath));
