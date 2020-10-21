@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import common.WebDriverFactory;
+import cucumber.api.java.en.Then;
 
 public class HomePage {
 	
@@ -20,6 +21,7 @@ public class HomePage {
 		PageFactory.initElements(WebDriverFactory.getDriver(), this);
 	}
 	
+	@Then("user should be able to see {string} message")
 	public HomePage verifyWelComeText(String expectedWelcomeText)
 	{
 		Assert.assertEquals(welcomeText.getText(), expectedWelcomeText);

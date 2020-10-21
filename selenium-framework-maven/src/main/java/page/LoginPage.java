@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import common.WebDriverFactory;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 
 public class LoginPage {
 
@@ -22,9 +24,15 @@ public class LoginPage {
 		PageFactory.initElements(WebDriverFactory.getDriver(), this);
 	}
 	
+	@Given("user navigate to orange hrm URL")
+	public void user_navigate_to_orange_hrm_URL() {
+		WebDriverFactory.getDriver().get("https://opensource-demo.orangehrmlive.com/");
+	}
+	
+	@When("uses enters user name as {string} and password as {string} and click on login button")
 	public HomePage login(String strUserName, String strPassword)
 	{
-		WebDriverFactory.getDriver().get("https://opensource-demo.orangehrmlive.com/");
+		
 		userName.sendKeys(strUserName);
 		password.sendKeys(strPassword);
 		loginButton.click();
