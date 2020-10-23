@@ -7,6 +7,7 @@ import org.testng.Assert;
 
 import common.WebDriverFactory;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class HomePage {
 	
@@ -21,6 +22,7 @@ public class HomePage {
 		PageFactory.initElements(WebDriverFactory.getDriver(), this);
 	}
 	
+	
 	@Then("user should be able to see {string} message")
 	public HomePage verifyWelComeText(String expectedWelcomeText)
 	{
@@ -29,6 +31,7 @@ public class HomePage {
 		return this;
 	}
 	
+	@When("user navigate to admin page")
 	public AdminPage navigateToAdminPage()
 	{
 		adminTab.click();

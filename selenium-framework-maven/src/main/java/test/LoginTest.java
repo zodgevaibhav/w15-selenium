@@ -7,7 +7,7 @@ import common.IInvokedMethodListenerImpl;
 import page.LoginPage;
 
 @Listeners({IInvokedMethodListenerImpl.class})
-public class LoginTest {
+public class LoginTest{
 	
 	
 	@Test
@@ -15,7 +15,8 @@ public class LoginTest {
 	{
 		LoginPage lp = new LoginPage();
 		
-		lp.login("admin", "admin123")
+		lp.navigateToOrangeHrmURL()
+			.login("admin", "admin123")			
 			.verifyWelComeText("Welcome Pul");
 	}
 

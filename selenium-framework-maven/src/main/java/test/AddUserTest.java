@@ -15,33 +15,36 @@ public class AddUserTest{
 		String randomNumber = new Long(System.currentTimeMillis()).toString();
 		
 		LoginPage lp = new LoginPage();
-		lp.login("admin", "admin123")
-			.verifyWelComeText("Welcome Paul")
-				.navigateToAdminPage()
-					.navigateToAddUserPage()
-						.addUser("USER_"+randomNumber, "", "", "", "", "");
+		lp.navigateToOrangeHrmURL()
+			.login("admin", "admin123")
+				.verifyWelComeText("Welcome Paul")
+					.navigateToAdminPage()
+						.navigateToAddUserPage()
+							.addUser("USER_"+randomNumber, "", "", "", "", "");
 	}
 	
 	@Test
 	public void verifyPasswordComplexityMessageDisplayAsVeryWeak()
 	{
 		LoginPage lp = new LoginPage();
-		lp.login("admin", "admin123")
-			.verifyWelComeText("Welcome Paul")
-				.navigateToAdminPage()
-					.navigateToAddUserPage()
-					.enterPasswordAndVerifyPasswordComplexityMessage("a", "Very Weak");
-	}
+		lp.navigateToOrangeHrmURL()
+			.login("admin", "admin123")
+				.verifyWelComeText("Welcome Paul")
+					.navigateToAdminPage()
+						.navigateToAddUserPage()
+						.enterPasswordAndVerifyPasswordComplexityMessage("a", "Very Weak");
+		}
 	
 	@Test
 	public void verifyPasswordComplexityMessageDisplayAsWeak()
 	{
 		LoginPage lp = new LoginPage();
-		lp.login("admin", "admin123")
-			.verifyWelComeText("Welcome Paul")
-				.navigateToAdminPage()
-					.navigateToAddUserPage()
-						.enterPasswordAndVerifyPasswordComplexityMessage("asdfsf", "Weak");
+		lp.navigateToOrangeHrmURL()
+				.login("admin", "admin123")
+				.verifyWelComeText("Welcome Paul")
+					.navigateToAdminPage()
+						.navigateToAddUserPage()
+							.enterPasswordAndVerifyPasswordComplexityMessage("asdfsf", "Weak");
 	}
 
 }

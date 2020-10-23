@@ -25,14 +25,15 @@ public class LoginPage {
 	}
 	
 	@Given("user navigate to orange hrm URL")
-	public void user_navigate_to_orange_hrm_URL() {
+	public LoginPage navigateToOrangeHrmURL()
+	{
 		WebDriverFactory.getDriver().get("https://opensource-demo.orangehrmlive.com/");
+		return this;
 	}
 	
 	@When("uses enters user name as {string} and password as {string} and click on login button")
 	public HomePage login(String strUserName, String strPassword)
 	{
-		
 		userName.sendKeys(strUserName);
 		password.sendKeys(strPassword);
 		loginButton.click();

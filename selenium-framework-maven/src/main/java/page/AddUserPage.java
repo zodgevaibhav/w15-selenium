@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import common.WebDriverFactory;
+import cucumber.api.java.en.Then;
 
 public class AddUserPage {
 	
@@ -29,6 +30,13 @@ public class AddUserPage {
 		
 		
 		*/
+	}
+	
+	@Then("user add admin user with employee name as {string}, user name as {string}, password as {string} and confirm password as {string}")
+	public void user_add_admin_user_with_employee_name_as_user_name_as_password_as_and_confirm_password_as(String string, String string2, String string3, String string4) {
+	 
+		
+		
 	}
 	
 	

@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import common.WebDriverFactory;
+import cucumber.api.java.en.When;
 
 public class AdminPage {
 	
@@ -16,7 +17,7 @@ public class AdminPage {
 		PageFactory.initElements(WebDriverFactory.getDriver(), this);
 	}
 	
-	
+	@When("user navigate to add user page")
 	public AddUserPage navigateToAddUserPage()
 	{
 		addButton.click();

@@ -15,6 +15,8 @@ public class IInvokedMethodListenerImpl implements IInvokedMethodListener {
 
 	@Override
 	public void beforeInvocation(IInvokedMethod arg0, ITestResult arg1) {
+		ExtentReportTestFactory.createNewTest(arg0.getTestMethod().getMethod().getDeclaringClass().getSimpleName(),arg0.getTestMethod().getMethodName());
+
 		System.setProperty("webdriver.chrome.driver", "/Users/vaibhavzodge/Documents/selenium/chromedriver");
 		
 		WebDriverFactory.setDriver(new ChromeDriver());
@@ -32,8 +34,14 @@ public class IInvokedMethodListenerImpl implements IInvokedMethodListener {
 			String randomNumber = new Long(System.currentTimeMillis()).toString();
 			
 			takeScreenshot(method.getTestMethod().getMethodName()+"-"+randomNumber+".png");
+			ExtentReportTestFactory.getTest().fail(testResult.getThrowable());
+			try {
+				ExtentReportTestFactory.getTest().addScreenCaptureFromPath(method.getTestMethod().getMethodName()+"-"+randomNumber+".png");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		
+		ExtentReportTestFactory.flushReport();
 		WebDriverFactory.getDriver().quit();
 		
 	}
