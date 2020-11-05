@@ -10,13 +10,13 @@ import cucumber.api.java.en.When;
 
 public class LoginPage {
 
-	@FindBy(id="txtUsername")
+	@FindBy(xpath="//*[@resource-id='txtUsername']")
 	WebElement userName;
 	
-	@FindBy(id="txtPassword")
+	@FindBy(xpath="//*[@resource-id	='txtPassword']")
 	WebElement password;
 	
-	@FindBy(id="btnLogin")
+	@FindBy(xpath="//*[@resource-id	='btnLogin']")
 	WebElement loginButton;
 	
 	public LoginPage()
@@ -28,6 +28,13 @@ public class LoginPage {
 	public LoginPage navigateToOrangeHrmURL()
 	{
 		WebDriverFactory.getDriver().get("https://opensource-demo.orangehrmlive.com/");
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(WebDriverFactory.getDriver().getPageSource());
 		return this;
 	}
 	
@@ -37,6 +44,13 @@ public class LoginPage {
 		userName.sendKeys(strUserName);
 		password.sendKeys(strPassword);
 		loginButton.click();
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return new HomePage();
 	}	

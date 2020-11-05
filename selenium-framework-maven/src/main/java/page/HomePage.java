@@ -1,9 +1,11 @@
 package page;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import common.WebDriverFactory;
 import cucumber.api.java.en.Then;
@@ -26,7 +28,9 @@ public class HomePage {
 	@Then("user should be able to see {string} message")
 	public HomePage verifyWelComeText(String expectedWelcomeText)
 	{
-		Assert.assertEquals(welcomeText.getText(), expectedWelcomeText);
+		//Assert.assertEquals(welcomeText.getText(), expectedWelcomeText);
+			assertEquals(welcomeText.getText(), expectedWelcomeText);
+			assertNotEquals("", "");
 		
 		return this;
 	}

@@ -2,26 +2,49 @@ package common;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestResult;
 
+import io.appium.java_client.android.AndroidDriver;
+
 public class IInvokedMethodListenerImpl implements IInvokedMethodListener {
 
 	@Override
-	public void beforeInvocation(IInvokedMethod arg0, ITestResult arg1) {
-		ExtentReportTestFactory.createNewTest(arg0.getTestMethod().getMethod().getDeclaringClass().getSimpleName(),arg0.getTestMethod().getMethodName());
+	public void beforeInvocation(IInvokedMethod method, ITestResult arg1) {
+		
+		ExtentReportTestFactory.createNewTest(method.getTestMethod().getMethod().getDeclaringClass().getSimpleName(),method.getTestMethod().getMethodName());
 
-		System.setProperty("webdriver.chrome.driver", "/Users/vaibhavzodge/Documents/selenium/chromedriver");
+	/*	System.setProperty("webdriver.chrome.driver", "/Users/vaibhavzodge/Documents/selenium/chromedriver");
 		
 		WebDriverFactory.setDriver(new ChromeDriver());
+	*/	
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities.setCapability("browser", "android");
+		capabilities.setCapability("deviceName", "android");
+		capabilities.setCapability("platformName", "android");
+		capabilities.setCapability("appActivity", "com.google.android.apps.chrome.Main");
+		capabilities.setCapability("appPackage", "com.android.chrome");
+		capabilities.setCapability("noReset", "true");
+		
+		try {
+			WebDriver dr = new AndroidDriver<WebElement>(new URL("http://localhost:4723/wd/hub"), capabilities);
+			WebDriverFactory.setDriver(dr);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		WebDriverFactory.getDriver().manage().window().maximize();
+		//WebDriverFactory.getDriver().manage().window().maximize();
 	}
 
 	
@@ -41,7 +64,8 @@ public class IInvokedMethodListenerImpl implements IInvokedMethodListener {
 				e.printStackTrace();
 			}
 		}
-		ExtentReportTestFactory.flushReport();
+		ExtentReportTestFactory.getTest().info(new Long(testResult.getEndMillis()-testResult.getStartMillis()).toString());
+		ExtentReportTestFactory.flushReport(); //write on html file
 		WebDriverFactory.getDriver().quit();
 		
 	}

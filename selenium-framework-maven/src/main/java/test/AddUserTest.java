@@ -27,6 +27,30 @@ public class AddUserTest{
 	public void verifyPasswordComplexityMessageDisplayAsVeryWeak()
 	{
 		LoginPage lp = new LoginPage();
+		lp
+			.login("admin", "admin123")
+				.verifyWelComeText("Welcome Paul")
+					.navigateToAdminPage()
+						.navigateToAddUserPage()
+						.enterPasswordAndVerifyPasswordComplexityMessage("a", "Very Weak");
+		}
+	
+	@Test
+	public void verifyPasswordComplexityMessageDisplayAsVeryWeak1()
+	{
+		LoginPage lp = new LoginPage();
+		lp.navigateToOrangeHrmURL()
+			.login("admin", "admin123")
+				.verifyWelComeText("Welcome Paul")
+					.navigateToAdminPage()
+						.navigateToAddUserPage()
+						.enterPasswordAndVerifyPasswordComplexityMessage("a", "Very Weak");
+		}
+	
+	@Test
+	public void verifyPasswordComplexityMessageDisplayAsVeryWeak3()
+	{
+		LoginPage lp = new LoginPage();
 		lp.navigateToOrangeHrmURL()
 			.login("admin", "admin123")
 				.verifyWelComeText("Welcome Paul")
