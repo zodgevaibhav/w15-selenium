@@ -3,23 +3,42 @@ package test;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import common.ExtentReportTestFactory;
+import common.BaseSelenium;
 import common.IInvokedMethodListenerImpl;
 import page.LoginPage;
 
 @Listeners({IInvokedMethodListenerImpl.class})
-public class LoginTest{
+public class LoginTest extends BaseSelenium{
 	
 	
-	@Test
-	public void verifyAdminUserLoginSuccessful()
+	@Test(dataProvider="loginExcelData")
+	public void verifyAdminUserLoginSuccessful(String userName, String password)
 	{
-		ExtentReportTestFactory.getTest().info("TESTTTTTTTTTTTTTTTTTTTTT");
+		LoginPage lp = new LoginPage();
+		
+		lp.navigateToOrangeHrmURL()
+			.login(userName, password)			
+				.verifyWelComeText("Welcome Pul");
+	}
+	
+	/*@Test
+	public void verifyAdminUserLoginSuccessful1()
+	{
 		LoginPage lp = new LoginPage();
 		
 		lp.navigateToOrangeHrmURL()
 			.login("admin", "admin123")			
 				.verifyWelComeText("Welcome Pul");
 	}
-
+	
+	@Test
+	public void verifyAdminUserLoginSuccessful2()
+	{
+		LoginPage lp = new LoginPage();
+		
+		lp.navigateToOrangeHrmURL()
+			.login("admin", "admin123")			
+				.verifyWelComeText("Welcome Pul");
+	}
+*/
 }

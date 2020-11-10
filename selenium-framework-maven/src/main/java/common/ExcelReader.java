@@ -1,69 +1,19 @@
 package common;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.testng.annotations.DataProvider;
 
-public class BaseSelenium {
+public class ExcelReader {
 	private static XSSFSheet ExcelWSheet;
 	private static XSSFWorkbook ExcelWBook;
 	//private static HSSFWorkbook ExcelWBook;
 	private static XSSFCell Cell;
-	
-	@DataProvider(name="loginArrayData")
-	public String[][] getArrayData()
-	{
-		
-		String loginData[][] = {
-					{"1","admin123","Welcome Admin"},
-					{"vaibhav","vaibhav123","Welcome Vaibhav"},
-					{"avinash","avinash123","Welcome Avinash"},
-					{"vishal","vishal123","Welcome Vishal"}
-				};
-		
-		return loginData;
-	}
-	
-	@DataProvider(name="loginCSVData")
-	public String[][] getDataFromCSV() throws IOException
-	{
-
-		String fileName = "/Users/vaibhavzodge/git/w1415-selenium/selenium-framework-maven/src/main/java/test/LoginData.csv";
-		File file = new File(fileName);
-		FileReader fr = new FileReader(file);
-		BufferedReader br = new BufferedReader(fr);
-		String line;
-
-		boolean isFileHaveData = true;
-
-		String[][] loginData = new String[3][2];
-		int index = 0;
-		while (isFileHaveData) {
-			line = br.readLine();
-			if (line == null) {
-				isFileHaveData = false;
-			} else {
-				loginData[index]=line.split(",");
-				index = index+1;
-			}
-		}
-		
-		return loginData;
-	
-	}
-	
-	@DataProvider(name="loginExcelData")
-	public String[][] getDataFromExcel()
-	{
-
+	public static void main(String[] args) throws Exception {
 		String[][] tabArray = null;
 		
 		String FilePath="/Users/vaibhavzodge/git/w1415-selenium/selenium-framework-maven/src/main/java/test/LoginTests.xlsx";
@@ -98,28 +48,38 @@ public class BaseSelenium {
 				System.out.println("Could not read the Excel sheet");
 				e.printStackTrace();
 			}
-			return tabArray;
-	
+			System.out.println(tabArray);
 	}
 	
-	/*
-	@BeforeMethod
-	public void beforeEachTest()
-	{
-		System.setProperty("webdriver.chrome.driver", "/Users/vaibhavzodge/Documents/selenium/chromedriver");
-				
-		
-		WebDriverFactory.setDriver(new ChromeDriver());
-		
-		
-		WebDriverFactory.getDriver().manage().window().maximize();
+
+	public static int getUsedRows() throws Exception {
+		try{
+			int RowCount = ExcelWSheet.getLastRowNum();
+			return RowCount;
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+			throw (e);
+		}
 	}
 	
-	@AfterMethod
-	public void AfterEachTest()
-	{
-		WebDriverFactory.getDriver().quit();
+	public static int getUsedColumns() throws Exception {
+		try{
+			int ColCount = ExcelWSheet.getRow(0).getLastCellNum();
+			return ColCount;
+		}catch (Exception e){
+			System.out.println(e.getMessage());
+			throw (e);
+		}
 	}
-	*/
+	
+	public static String getCellData(int RowNum, int ColNum) throws Exception{
+		   try{
+			  Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
+			  String CellData = Cell.getStringCellValue();
+			  return CellData;
+			  }catch (Exception e){
+				return"";
+				}
+			}
 
 }
