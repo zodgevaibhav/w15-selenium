@@ -6,6 +6,8 @@ import static org.testng.Assert.assertNotEquals;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import common.WebDriverFactory;
 import cucumber.api.java.en.Then;
@@ -19,9 +21,13 @@ public class HomePage {
 	@FindBy(id="menu_admin_viewAdminModule")
 	WebElement adminTab;
 	
+	WebDriverWait wait;
 	public HomePage()
 	{
 		PageFactory.initElements(WebDriverFactory.getDriver(), this);
+		wait = new WebDriverWait(WebDriverFactory.getDriver(), 20);
+		
+		wait.until(ExpectedConditions.visibilityOf(welcomeText));
 	}
 	
 	
@@ -42,5 +48,6 @@ public class HomePage {
 		
 		return new AdminPage();
 	}	
+	
 
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -44,7 +45,9 @@ public class IInvokedMethodListenerImpl implements IInvokedMethodListener {
 			e.printStackTrace();
 		}
 
+		WebDriverFactory.getDriver().manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//WebDriverFactory.getDriver().manage().window().maximize();
+		
 	}
 
 	
